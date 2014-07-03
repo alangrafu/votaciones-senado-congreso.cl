@@ -25,12 +25,12 @@ Los archivos XML están en data/xml.tar.gz.
  cat *.ttl > ALL
 # [OPCIONAL] Entrega los mismos datos en una versión más compacta
  rapper -i turtle -o turtle ALL > all.ttl
+```
  
+From the beginning
+==================
  
- From the beginning
- ==================
- 
- Ejecutar
+Ejecutar
  
 ```
   ./0_fetchxml.sh
