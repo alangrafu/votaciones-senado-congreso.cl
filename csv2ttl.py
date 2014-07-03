@@ -31,15 +31,19 @@ with open(sessionFile) as f:
 		if row[0] == '':
 			exit(0)
 		sessionId = slugify.slugify(unicode(row[0].decode('utf-8')))
-		session = URIRef(baseUri+'session/'+slugify.slugify(unicode(row[0].decode('utf-8'))))
+		session = URIRef(baseUri+'session/'+slugify.slugify(unicode(row[0].decode('utf-8')))+'/'+slugify.slugify(unicode(row[1].decode('utf-8')))+'/'+sys.argv[1])
 		date = datetime.datetime.strptime(row[1], "%d/%m/%Y").strftime("%Y-%m-%d")
 		g.add((session, DCTERMS['date'], Literal(date, datatype=XSD.date)))
 		g.add((session, DCTERMS['identifier'], Literal(row[0])))
 		g.add((session, DCTERMS['description'], Literal(row[2])))
-		g.add((session, CONGRESO['si'], Literal(row[3], datatype=XSD.integer)))
-		g.add((session, CONGRESO['no'], Literal(row[4], datatype=XSD.integer)))
-		g.add((session, CONGRESO['abstencion'], Literal(row[5], datatype=XSD.integer)))
-		g.add((session, CONGRESO['pareo'], Literal(row[6], datatype=XSD.integer)))
+		if row[3] !=  '':
+			g.add((session, CONGRESO['si'], Literal(row[3], datatype=XSD.integer)))
+		if row[4] !=  '':
+			g.add((session, CONGRESO['no'], Literal(row[4], datatype=XSD.integer)))
+		if row[5] !=  '':
+			g.add((session, CONGRESO['abstencion'], Literal(row[5], datatype=XSD.integer)))
+		if row[6] !=  '':
+			g.add((session, CONGRESO['pareo'], Literal(row[6], datatype=XSD.integer)))
 
 with open(voteFile) as f:
 	csv = csv.reader(f, delimiter="\t")
