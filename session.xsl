@@ -3,6 +3,9 @@
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="/">
-<xsl:value-of select="votaciones/votacion/SESION"/>	<xsl:value-of select="votaciones/votacion/FECHA"/>	<xsl:value-of select="votaciones/votacion/TEMA"/>	<xsl:value-of select="votaciones/votacion/SI"/>	<xsl:value-of select="votaciones/votacion/NO"/>	<xsl:value-of select="votaciones/votacion/ABSTENCION"/>	<xsl:value-of select="votaciones/votacion/PAREO"/>	<xsl:value-of select="votaciones/votacion/TIPOVOTACION"/>	<xsl:value-of select="votaciones/votacion/ETAPA"/>\n
+<xsl:text>sesion	fecha	tema	si	no	abstencion	pareo	tipo_votacion	etapa	quorum
+</xsl:text>
+<xsl:value-of select="votaciones/votacion/SESION"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/FECHA"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/TEMA"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/SI"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/NO"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/ABSTENCION"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/PAREO"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/TIPOVOTACION"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/ETAPA"/><xsl:text>	</xsl:text><xsl:value-of select="votaciones/votacion/QUORUM"/><xsl:text>
+</xsl:text>
 </xsl:template>
 </xsl:stylesheet>
