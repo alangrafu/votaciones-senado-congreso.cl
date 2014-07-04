@@ -4,7 +4,7 @@
   <div class="row">
     <p>Basado en algunos datos disponibles en el sitio <a href='http://opendata.congreso.cl'>http://opendata.congreso.cl</a> decidí convertirlos a RDF y crear visualizaciones usando <a href='http://visualbox.org'>Visualbox</a>. Para esto, tomé los boletines del senado donde se desglosa la información sobre los votos de cada senador en cada sesión. A partir de eso, estructuré los datos y armé algunas visualizations
     </p>
-    <p>Los scripts para convertir los datos, así como los componentes de visualbox están disponibles en <a href='https://github.com/alangrafu/votaciones-senado-congreso.cl'>https://github.com/alangrafu/votaciones-senado-congreso.cl</a>, bajo licencia BSD.</p>
+    <p>Los scripts para convertir los datos, así como los componentes de visualbox están disponibles en <a href='https://github.com/alangrafu/votaciones-senado-congreso.cl'>https://github.com/alangrafu/votaciones-senado-congreso.cl</a>, bajo licencia BSD. </p><p><strong>Disclaimer:</strong> Este demo tiene fines pedagógicos. A pesar de tratar de usar los datos de la manera más fiel a la realidad, es posible que exista algún error en las visualizaciones o incluso en los datos mismos. Si ves algo que crees es un error, escríbeme a MINOMBRE arroba MIAPELLIDO punto CL.</p>
     <div class="table-responsive">
 <table id="t" class="table table-hover">
   <theader></theader>
