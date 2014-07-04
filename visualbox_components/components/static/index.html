@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Visualbox Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      .wait{
+        background-image:url('img/wait.gif');
+        background-repeat:no-repeat;
+        padding-right:20px;
+        background-position: right;
+      }
+    </style>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.typeahead').typeahead({
+            source: function (typeahead, query) {
+              $('.typeahead').addClass('wait');[]
+              return $.get('search/'+encodeURIComponent(query), { }, function (data) {
+                  $('.typeahead').removeClass('wait');[]
+                  return typeahead.process(data);
+              }, 'json');
+            },
+            onselect: function (obj) {
+              $('.typeahead').attr('disabled', true);
+              window.location = obj.uri;
+            }
+        });
+    });
+    </script>
+  </head>
+  <body>
+ <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Visualbox</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="admin">Admin Menu</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <img src="img/lodspeakr_logotype.png" style="opacity: 0.1; position: absolute; right:0px; top:60%"/>
+      <h1>Welcome to Visualbox!</h1>
+      <p></p>
+     <div class='row-fluid'>
+      <div class="span5 well">
+      <h2>What is this?</h2>
+        <p>Visualbox allows you to create visualizations based on <a href='http://linkeddata.org'>Linked Open Data</a>. The goal of Visualbox is to facilitate the creation of visualization without the need to learn Javascript libraries. You <strong>do need</strong> to know a bit of <a href='http://www.w3.org/TR/rdf-sparql-query/'>SPARQL</a> and some notions of HTML though.</p>
+        <p> Visualbox is a simplified version of <a href='http://lodspeakr.org'>LODSPeaKr</a>, a framework to create Linked Data-based applications.</p>
+      </div>
+      <div class="span5 well">
+      <h2>Configuring Visualbox</h2>
+        <p>Visualbox comes with several endpoints and namespaces configured by default but you can edit them or add more.</p>
+        <ul>
+          <li>You can <a href='admin/components'>create new visualizations</a></li>
+          <li>You can <a href='admin/endpoints'>edit endpoints or add your own</a></li>
+          <li>You can <a href='admin/namespaces'>edit namespaces or add your own</a></li>
+        </ul>
+        <a href='admin'><button class='btn btn-large btn-info'>Go to the admin menu</button></a>
+      </div>
+    </div>
+    <div class='row-fluid'>
+     <div class="span5 well">
+      <h2>Examples available</h2>
+      <p>There are several examples available in the demo site (all of them use data from DBpedia). These examples are also included in this installation, you can look for them in the <a href='admin'>admin menu</a>.</p>
+      <ul>
+       <li><a href='http://visualbox.org/demo/nobel_laureates_by_country'>Total of Nobel laureates in Physics by country</a></li>
+       <li><a href='http://visualbox.org/demo/people_influenced_by_neruda'>Influence tree starting by Pablo Neruda</a></li>
+       <li><a href='http://visualbox.org/demo/places_in_rensselaer_county_by_area'>Places in Rensselaer county and their areas</a></li>
+       <li><a href='http://visualbox.org/demo/heinlein_and_bradbury'>People influenced by Robert Heinlein and Ray Bradbury</a></li>
+       <li><a href='http://visualbox.org/demo/lamborghini_cars'>Comparison of different characteristics of Lamborghini cars</a></li>
+       <li><a href='http://visualbox.org/demo/cities_by_area'>Largest cities (in sq. km) in the US</a></li>
+       <li><a href='http://visualbox.org/demo/triples_in_a_table'>20 triples in a Google Table</a></li>
+      </ul>
+     </div>
+     <div class="span5 well">
+      <h2>Create new visualizations</h2>
+      <p>The easiest way to create new visualizations is using the Component Editor.</p>
+      <ul>
+       <li>Look at the tutorial on <a href='https://github.com/alangrafu/visualbox/wiki/How-to-create-a-new-visualization'>how to create a new visualization</a></li>
+       <li>How to <a href='https://github.com/alangrafu/visualbox/wiki/Endpoints'>add new endpoints</a></li>
+      </ul>
+      <p>You can also use the command line tool (info from the LODSPeaKr wiki):</p>
+      <ul>
+       <li><a href='https://github.com/alangrafu/lodspeakr/wiki/Creating-components-in-LODSPeaKr'>Creating components</a></li>
+       <li><a href='https://github.com/alangrafu/lodspeakr/wiki/Filters-in-LODSPeaKr'>Filters available</a></li>
+       <li><a href='http://alangrafu.github.com/lodspeakr/applications.html'>Other apps created using LODSPeaKr</a></li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </body>
+</html>
+
+

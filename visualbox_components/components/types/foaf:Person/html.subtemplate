@@ -1,0 +1,87 @@
+<div class='container'>
+<div class='row'>
+<h1>{{first.details.name.value}}</h1>
+ <div id="wordcloud_ID_53b659f63e5bd"></div>
+</div>
+</div>
+<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+<script src="http://graves.cl/opendata.congreso.cl/visualbox/js/d3.layout.cloud.js"></script>
+<script>
+// Based on http://www.jasondavies.com/wordcloud 
+function D3WordCloud_ID_53b659f63e5bd(words, newcfg){
+  var cfg = {width: 300,
+             height: 300,
+             font: "sans-serif",
+             minsize: 10,
+             maxsize: 100,
+             wordOrientation: "random",
+             color: "black",
+             stopwords: ["a", "o", "u", "y", "para", "de", "en", "que", "del", "n°", "el", "la", "las", "los", "que", "con", "artículo", "boletín", "proyecto"]
+  };
+  for(i in newcfg){
+    cfg[i] = newcfg[i];
+  }
+  var countingWords = {};
+  var totalWords = new Array();
+  
+  if(!cfg.count){
+    for(i in words){
+      var d = words[i].replace(/[()\.]/gi, "");
+      if(cfg.stopwords.indexOf(d)<0){
+        if(countingWords[d] != undefined){ 
+          countingWords[d] += 1
+        }else{
+          countingWords[d] = 1
+        }
+      }
+    }
+    for(i in countingWords){
+      totalWords.push({name: i, total: countingWords[i]});
+    }  
+  }else{
+      totalWords = words;
+  }
+  var maxValue = Math.max.apply(Math, totalWords.map(function(d){return d.total;}));
+  var wordLinks = new Array();
+  for(i in totalWords){
+    wordLinks[totalWords[i].name] = totalWords[i].link || undefined;
+  }
+  d3.layout.cloud().size([cfg.width, cfg.height])
+      .words(totalWords.map(function(d) {
+              return {text: d.name, size: parseInt(cfg.minsize + (cfg.maxsize-cfg.minsize)*(d.total/maxValue))};
+      }))
+      .rotate(function() { var x=~~(Math.random() * 2) * 90; if(cfg.wordOrientation == "horizontal"){x = 0;}if(cfg.wordOrientation == "vertical"){x = 90;} return x; })
+      .padding(1)
+      .font("arial")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();
+
+  function draw(words) {
+    var svg = d3.select("#wordcloud_ID_53b659f63e5bd").append("svg");
+    
+    var g = svg.attr("width", cfg.width)
+        .attr("height", cfg.height).append("g")
+        .attr("transform", "translate("+cfg.width/2+","+cfg.height/2+")");
+        
+        g.selectAll("text").data(words)
+      .enter().append("a").attr("xlink:href", function(d){return wordLinks[d.text]}).append("text")
+        .style("font-family", cfg.font)
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("fill", cfg.color)
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; });
+        
+  }
+}
+var words_ID_53b659f63e5bd = [];
+var options_ID_53b659f63e5bd = {"width":960,"height":500,"color":"#aec7e8","radius":10,"count":false}
+  {%for row in models.main%}
+  x = "{{row.desc.value}}".toLowerCase().replace(/[\(\)\?\.,:]/g, "").split(" ")
+  words_ID_53b659f63e5bd = words_ID_53b659f63e5bd.concat(x);
+  {%endfor%}
+D3WordCloud_ID_53b659f63e5bd(words_ID_53b659f63e5bd, options_ID_53b659f63e5bd);
+</script>

@@ -1,0 +1,6 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+select ?name WHERE{
+ GRAPH <http://opendata.congreso.cl>{
+  <{{uri}}> foaf:name ?name .
+ }
+}

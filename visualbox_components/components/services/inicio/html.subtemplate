@@ -1,0 +1,30 @@
+<div class="container">
+  
+  <h1>Visualizaciones de votaciones del Senado</h1>
+  <div class="row">
+    <p>Basado en algunos datos disponibles en el sitio <a href='http://opendata.congreso.cl'>http://opendata.congreso.cl</a> decidí convertirlos a RDF y crear visualizaciones usando <a href='http://visualbox.org'>Visualbox</a>. Para esto, tomé los boletines del senado donde se desglosa la información sobre los votos de cada senador en cada sesión. A partir de eso, estructuré los datos y armé algunas visualizations
+    </p>
+    <p>Los scripts para convertir los datos, así como los componentes de visualbox están disponibles en <a href='https://github.com/alangrafu/votaciones-senado-congreso.cl'>https://github.com/alangrafu/votaciones-senado-congreso.cl</a>, bajo licencia BSD.</p>
+    <div class="table-responsive">
+<table id="t" class="table table-hover">
+  <theader></theader>
+  <tr><td><a href='quienVotaMas'><h3>¿Quien ha votado más veces? ¿menos?</h3></a></td><td><a href='quienVotaMas'><img src='mas.png' style="width:200px;"/></a></td></tr>
+  <tr><td><a href='masVotaciones'><h3>¿Cuáles han sido las votaciones más peleadas?</h3></a></td><td><a href='masVotaciones'><img src='discusiones.png' style="width:200px;"/></a></td></tr>
+  <tr><td><a href='temas'><h3>¿Qué temas están más relacionados con cada senador?</h3></a></td><td><a href='temas'><img src='temas.png' style="width:200px;"/></a></td></tr>
+</table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16779105-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

@@ -1,4 +1,4 @@
-from rdflib import URIRef, Graph, Literal, BNode, XSD, Namespace
+from rdflib import URIRef, Graph, Literal, BNode, XSD, Namespace, RDF
 import csv
 import sys
 import slugify
@@ -14,6 +14,7 @@ voted = URIRef(baseUri+"voted")
 CONGRESO = Namespace(baseUri)
 DCTERMS = Namespace('http://purl.org/dc/terms/')
 RDFS = Namespace('http://purl.org/dc/terms/')
+FOAF = Namespace('http://xmlns.com/foaf/0.1/')
 #Session
 session = None
 sessionId = None
@@ -48,10 +49,13 @@ with open(sessionFile) as f:
 with open(voteFile) as f:
 	csv = csv.reader(f, delimiter="\t")
 	for row in csv:
-		person = URIRef(baseUri+u'person/'+slugify.slugify(unicode(row[0].decode('utf-8'))))
+		personName = slugify.slugify(unicode(row[0].decode('utf-8')))
+		person = URIRef(baseUri+u'person/'+personName)
 		vote = Literal(row[1])
-		blank = URIRef(baseUri+u'vote/'+sessionId+u"/"+slugify.slugify(unicode(row[0].decode('utf-8'))))
+		blank = URIRef(baseUri+u'vote/'+sessionId+u"/"+personName+'/'+slugify.slugify(unicode(row[1].decode('utf-8'))))
 		g.add((person, votedInSession, blank))
+		g.add((person, FOAF['name'], Literal(personName)))
+		g.add((person, RDF['type'], FOAF['Person']))
 		g.add((blank, voted, vote))
 		g.add((blank, inSession, session))
 print g.serialize(format='n3')

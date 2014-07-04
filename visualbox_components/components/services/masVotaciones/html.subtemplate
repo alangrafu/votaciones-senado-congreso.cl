@@ -1,0 +1,48 @@
+<div class="container">
+  
+  <h1>¿Qué votaciones han sido las más peleadas en 2014?</h1>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mtext>Ordenado inversamente basado en&#xA0;</mtext>
+  <mtext>&#xA0;</mtext>
+  <mi>r</mi>
+  <mo>=</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mfrac>
+      <mtext>votos SI</mtext>
+      <mrow>
+        <mo stretchy="false">(</mo>
+        <mtext>votos SI</mtext>
+        <mo>+</mo>
+        <mtext>votos NO</mtext>
+        <mo stretchy="false">)</mo>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+  <div class="row">
+    	<div class="table-responsive">
+<table id="t" class="table table-hover">
+  <theader><td>Fecha</td><td>Descripción</td><td>Votos</td></theader>
+</table>
+    </div>
+  </div>
+</div>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+  data = []
+  {%for row in models.main%}
+  data.push({ 
+     "si": {{row.si.value}},
+  	 "no": {{row.no.value}},
+   	 "desc": "{{row.desc.value}}",
+  	 "date": "{{row.d.value}}",
+  	 "total": {{row.total.value}}
+  });
+  {%endfor%}
+  scale = d3.scale.linear().domain([0, 1]).range(["orangered", "steelblue"]);
+  x = d3.select("#t").selectAll("tr").data(data).enter().append("tr");
+  x.append("td").style("max-width", "200px").html(function(d){return d.date});
+  x.append("td").style("max-width", "500px").html(function(d){return d.desc});
+  x.append("td").style("background", function(d){return scale(d.total)}).html(function(d){return d.si+" si / "+d.no+" no"});
+  
+</script>

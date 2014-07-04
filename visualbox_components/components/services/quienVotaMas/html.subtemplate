@@ -1,0 +1,15 @@
+<div class="container">
+  
+  <h1>¿Qué senadores han votado más veces en 2014?</h1>
+  <div class="row">
+
+{{models.main|GoogleVizBarChart:"name,votaciones,width=1000"}}
+  </div>
+  <h1>¿Qué senadores han votado menos veces en 2014?</h1>
+  <div class="row">
+
+{{models.menos|GoogleVizBarChart:"name,votaciones,width=1000"}}
+  </div>
+
+
+</div>

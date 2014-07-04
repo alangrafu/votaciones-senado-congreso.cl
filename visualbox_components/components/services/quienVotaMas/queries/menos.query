@@ -1,0 +1,17 @@
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://opendata.congreso.cl/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+select ?person (COUNT(?votes) AS ?votaciones) ?name WHERE{
+ GRAPH <http://opendata.congreso.cl>{
+  ?person foaf:name ?name;
+          :votedInSession [ :voted ?votes ;
+                            :session ?session 
+                          ] .
+  ?session dcterms:date ?d .
+  FILTER(?d >= "2014-01-01"^^xsd:date)
+  FILTER(?person != <http://opendata.congreso.cl/person/parlamentario>)
+ }
+}group by ?person ?name
+ORDER BY ASC(?votaciones)
+LIMIT 20

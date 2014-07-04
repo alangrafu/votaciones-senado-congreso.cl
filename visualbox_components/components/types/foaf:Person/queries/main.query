@@ -1,0 +1,13 @@
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://opendata.congreso.cl/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+select ?desc WHERE{
+ GRAPH <http://opendata.congreso.cl>{
+  <{{uri}}> :votedInSession [ :voted ?votes ;
+                            :session ?session 
+                          ] .
+  ?session dcterms:date ?d ;
+           dcterms:description ?desc.
+  FILTER(?d >= "2014-01-01"^^xsd:date)
+ }
+}

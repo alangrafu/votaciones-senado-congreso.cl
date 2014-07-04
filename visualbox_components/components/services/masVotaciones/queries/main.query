@@ -1,0 +1,14 @@
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://opendata.congreso.cl/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+select ?si ?no ?desc ?d (xsd:float(?si / xsd:float(?si +?no)) AS ?total) WHERE{
+ GRAPH <http://opendata.congreso.cl>{
+  ?session dcterms:description ?desc;
+           dcterms:date ?d ;
+           :si ?si;
+           :no ?no .
+  FILTER(?d >= "2014-01-01"^^xsd:date)
+ }
+}
+ORDER BY ASC(?total)
+LIMIT 10
